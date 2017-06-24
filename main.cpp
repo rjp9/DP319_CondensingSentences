@@ -15,7 +15,6 @@
     Digitalarm clockscarea children.
  */
 
-
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -30,7 +29,6 @@ int main()
     string temp = "";
     vector<string> words;
     istringstream iss;
-    bool found = false;
 
     cout << "Enter the string you would like to condense: " << endl;
     getline(cin, userInput);
@@ -38,25 +36,20 @@ int main()
     while(iss >> temp)
         words.push_back(temp);
 
-    for(int i = 0; i < words.size() - 1;) //only increment if there wasn't a match
+    for(unsigned int i = 0; i < words.size() - 1; i++)
     {
-        found = false;
         firstWord = words.at(i);
         nextWord = words.at(i + 1);
-        for(int j = 0; j < firstWord.size(); j++)
+        for(unsigned int j = 0; j < firstWord.size(); j++)
         {
             temp = firstWord.substr(j);
-            if(nextWord.find(temp) == 0)
+            if(nextWord.find(temp) == 0) //if substr was found at the beginning of the next word...
             {
-                found = true;
                 words.at(i) += nextWord.replace(0, temp.size(), "");
                 words.erase(words.begin() + (i + 1));
+                i--; //we need to check the new word we just created as well
+                break;
             }
-            if(found) break;
-        }
-        if(!found)
-        {
-            i++;
         }
     }
 
