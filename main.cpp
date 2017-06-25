@@ -54,9 +54,7 @@ int main()
     }
 
     for(const auto& word : words)
-    {
         cout << word << " ";
-    }
     cout << endl;
 
     return 0;
